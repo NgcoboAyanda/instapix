@@ -1,0 +1,13 @@
+.input-text{
+    width: 100%;
+}
+
+.input-text__element__box{
+    height: 50px;
+    width: 100%;
+    background-color: transparent;
+    border: 1px solid var(--fc-light);
+    border-radius: 3px;
+    padding-left: var(--space-small);
+    font-size: var(--fs-mid);
+}

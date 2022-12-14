@@ -1,0 +1,21 @@
+.header{
+    height: 60px;
+    width: 100%;
+    background-color: var(--bg-dark);
+    padding: 0 var(--space-mid);
+    display: flex;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+.header__content__inner{
+    display: flex;
+    align-items: center;
+}
+
+.header__content__logo__inner{
+    display: flex;
+    align-items: center;
+}
