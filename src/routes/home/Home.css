@@ -23,11 +23,11 @@
 }
 
 .home__content__action__text__description{
-    margin-top: var(--space-small);
+    margin-top: var(--space-mid);
 }
 
 .home__content__action__form{
-    margin-top: var(--space-small);
+    margin-top: var(--space-mid);
 }
 
 .home__content__action__form__element{
