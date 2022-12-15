@@ -35,6 +35,7 @@
 .button_ui{
     background-color: #e1e1e1;
     border-radius: 3px;
+    transition: transform 0.0025s linear;
 }
 
 .button_ui__text__inner{
@@ -44,4 +45,8 @@
 
 .button_ui:hover{
     background-color: #e5e5e5;
+}
+
+.button_ui:active{
+    transform: scale(0.96);
 }
