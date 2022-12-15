@@ -19,21 +19,26 @@
   /* colors */
     /* background */
   --bg-dark: #252b30;
+    /* theme */
+    --color-primary-light: rgb(35, 107, 208);
+    --color-primary: rgb(24, 95, 194);
 
   /* margins/paddings */
   --space-tiny: 4px;
   --space-small: 8px;
   --space-mid: 16px;
   --space-big: 24px;
+
+  /* page width */
+  --max-page-width: 1200px;
 }
 
 * {
-  box-sizing: border-box;
+  box-sizing: border-box !important;
   outline: none;
   padding: 0;
   margin: 0;
   font-family: var(--ff-default);
-  color: var(--fc-normal);
 }
 
 .body {
@@ -45,13 +50,14 @@
   font-weight: 600;
 }
 
+.heading_small{
+  font-size: var(--fs-normal)
+}
+
 .heading_big{
   font-size: var(--fs-big);
 }
 
-.heading_light{
-  color: var(--f);
-}
 
 .paragraph{
   font-size: var(--fs-normal);

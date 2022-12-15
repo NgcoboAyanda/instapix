@@ -5,6 +5,7 @@ import './App.css';
 
 import Header from '../components/Header/Header';
 import Home from '../routes/home/Home';
+import Result from '../routes/result/Result';
 
 
 function App() {
@@ -19,7 +20,8 @@ function App() {
           <div className="app__content">
             <div className="app__content__inner">
               <Routes>
-                <Route path="/" element={<Home/>} />
+                <Route exact path="/" element={<Home/>} />
+                <Route exact path="result/" element={<Result/>} />
               </Routes>
             </div>
           </div>

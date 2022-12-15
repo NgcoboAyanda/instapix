@@ -10,6 +10,17 @@
     left: 0;
 }
 
+.header__inner{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.header__content{
+    width: 100%;
+    max-width: 1400px;
+}
+
 .header__content__inner{
     display: flex;
     align-items: center;

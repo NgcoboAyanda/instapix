@@ -1,0 +1,47 @@
+.button {
+    padding: 0 var(--space-big);
+    border: none;
+    width: 100%;
+    cursor: pointer;
+}
+
+/* sizes */
+.button_size-normal{
+    height: 50px;
+    font-size: var(--fs-mid);
+}
+
+.button_size-small{
+    height: 30px;
+    font-size: var(--fs-normal);
+}
+
+/* variants */
+ /* filled */
+.button_filled{
+    font-weight: var(--fw-big);
+    background-color: var(--color-primary);
+}
+
+.button_filled__text__inner{
+    color: white;
+}
+
+.button_filled:hover{
+    background-color: var(--color-primary-light);
+}
+
+ /* ui */
+.button_ui{
+    background-color: #e1e1e1;
+    border-radius: 3px;
+}
+
+.button_ui__text__inner{
+    color: var(--fc-normal);
+    font-weight: var(--fw-big);
+}
+
+.button_ui:hover{
+    background-color: #e5e5e5;
+}

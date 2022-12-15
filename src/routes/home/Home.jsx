@@ -1,15 +1,27 @@
-import React from 'react';
-import { useForm } from "react-hook-form";
+import React, { useState } from 'react';
+import { useForm, Controller } from "react-hook-form";
+
+import Option  from '../../components/Option/Option';
+import Button from '../../components/Button/Button';
 import InputText from '../../components/InputText/InputText';
 
 import './Home.css';
+import { useNavigate } from 'react-router';
 
 const Home = () => {
+    const navigate = useNavigate();
 
-    const { register, handleSubmit, watch } = useForm();
+    const { register, handleSubmit, watch, control } = useForm({
+        defaultValues: {
+            'prompt': "",
+            'resolution': "256x256"
+        }
+    });
 
-    const onCreate = data => {
-        console.log(data)
+    const onSubmit = data => {
+        if(data){
+            navigate('/result')
+        }
     }
 
     return (
@@ -42,21 +54,47 @@ const Home = () => {
                                         <div className="home__content__action__form__label">
                                             <div className="home__content__action__form__label__inner">
                                                 <div className="home__content__action__form__label__element">
-                                                    Type what you want to see
+                                                    <div>
+                                                        Type what you want to see
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <form className="home__content__action__form__element" onSubmit={handleSubmit(onCreate)}>
+                                        <form className="home__content__action__form__element" onSubmit={handleSubmit(onSubmit)}>
                                             <div className="home__content__action__form__element__inner">
                                                 <div className="home__content__action__form__element__input">
                                                     <div className="home__content__action__form__element__input__inner">
                                                         <InputText
                                                             register={register}
-                                                            name="homepage-inputText"
-                                                            value={watch("homepage-inputText")}
+                                                            name="prompt"
+                                                            value={watch("prompt")}
                                                         />
                                                     </div>
-                                                </div> 
+                                                </div>
+                                                 <div className="home__content__action__form__element__resolution">
+                                                    <div className="home__content__action__form__element__submit__resolution__inner">
+                                                        <Controller
+                                                            control={control}
+                                                            name="resolution"
+                                                            render={ ({ field: {onChange, value} })=> (
+                                                                <Option
+                                                                    label="Choose resolution size"
+                                                                    value={value}
+                                                                    setValue={onChange}
+                                                                    options={['256x256', '512x512', '1024x1024']}
+                                                                />
+                                                            ) }
+                                                        />
+                                                    </div>
+                                                 </div>
+                                                <div className="home__content__action__form__element__submit">
+                                                    <div className="home__content__action__form__element__submit__inner">
+                                                        <Button
+                                                            variant='filled'
+                                                            text='Generate Art'
+                                                        />
+                                                    </div>
+                                                </div>
                                             </div>
                                         </form>
                                     </div>
