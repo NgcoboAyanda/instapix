@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { useForm, Controller } from "react-hook-form";
+import { useNavigate, useParams } from 'react-router';
 
 import Option  from '../../components/Option/Option';
 import Button from '../../components/Button/Button';
 import InputText from '../../components/InputText/InputText';
 
 import './Home.css';
-import { useNavigate } from 'react-router';
+
 
 const Home = () => {
     const navigate = useNavigate();
@@ -20,7 +21,8 @@ const Home = () => {
 
     const onSubmit = data => {
         if(data){
-            navigate('/result')
+            const{prompt, resolution} = data;
+            navigate(`result/?prompt=${prompt}&resolution=${resolution}`);
         }
     }
 

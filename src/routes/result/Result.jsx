@@ -1,18 +1,45 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate, useParams } from 'react-router';
+import { useSearchParams } from 'react-router-dom';
+
 import InputText from '../../components/InputText/InputText';
 import Button from '../../components/Button/Button';
 
 import './Result.css';
-import { useSelector } from 'react-redux';
+import { generateImages } from '../../features/images/imagesSlice';
 
 const Result = () => {
     const resultImages = useSelector(state => state.images.current);
+    const status = useSelector(state => state.images.status)
+    const [searchParams] = useSearchParams();
 
-    const { handleSubmit, register, watch } = useForm();
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
+    const { handleSubmit, register, watch } = useForm({
+        defaultValues: {
+            'prompt': searchParams.get('prompt'),
+            'resolution': searchParams.get('resolution')
+        }
+    });
+
+    useEffect(
+        () => {
+            const {prompt, resolution} = watch();
+            if(prompt && resolution){
+                dispatch(generateImages({prompt, resolution}));
+            }
+        },
+        []
+    )
 
     const onSubmit = (data) => {
-        console.log(data)
+        if(data){
+            const{prompt, resolution} = data;
+            dispatch(generateImages({prompt, resolution}));
+        }
     }
 
     const clearImageHistory = () => {
@@ -20,11 +47,23 @@ const Result = () => {
     }
 
     const renderResultImages = () => {
+        if(status === 'loading'){
+            return [...Array(4)].map( (loader, i) => {
+                return (
+                    <div className="result__main__content__items__item" key={i}>
+                        <div className="result__main__content__items__item__inner">
+                            <div className="result__main__content__items__item__loader">
+                            </div>
+                        </div>
+                    </div>
+                )
+            } )
+        }
         return resultImages.map( (img, i) => {
             return (
                 <div className="result__main__content__items__item" key={i}>
                     <div className="result__main__content__items__item__inner">
-                        <img className="result__main__content__items__item__img" src={img}/>
+                        <img className="result__main__content__items__item__img" src={img.url}/>
                     </div>
                 </div>
             )

@@ -64,10 +64,32 @@
 
 .result__main__content__items__item__inner{
     width: 100%;
+    display: flex;
+    justify-content: center;
 }
 
 .result__main__content__items__item__img{
     width: 100%;
+}
+
+.result__main__content__items__item__loader{
+    color: #e8e8e8;
+    background-color: currentColor;
+    width: 230px;
+    height: 230px;
+    animation: 1.5s blink infinite;
+}
+
+@keyframes blink {
+    0%{
+        background-color: currentColor;
+    }
+    50%{
+        background-color: #f1f1f1;
+    }
+    100%{
+        background-color: currentColor;
+    }
 }
 
 .result__main__attribution{
