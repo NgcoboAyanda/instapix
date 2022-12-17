@@ -27,7 +27,9 @@ export const generateImages = createAsyncThunk(
                 setCurrent([...images])
             )
         }
-        
+        else{
+            console.log(response)
+        }
     }
 )
 

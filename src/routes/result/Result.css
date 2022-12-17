@@ -54,14 +54,20 @@
     color: var(--fc-light);
 }
 
+.result__main__content__download-btn{
+    margin-top: var(--space-big);
+    display: flex;
+    justify-content: flex-end;
+}
+
 .result__main__content__items{
+    margin-top: var(--space-big);
     flex: 1;
 }
 
 .result__main__content__items__inner{
     height: 100%;
     display: grid;
-    align-items: center;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     grid-gap: var(--space-small);
 }

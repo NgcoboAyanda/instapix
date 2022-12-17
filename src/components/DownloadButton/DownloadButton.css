@@ -1,0 +1,57 @@
+.download-btn{
+    color: var(--fc-light);
+    cursor: pointer;
+}
+
+.download-btn_icon{
+    background-color: var(--color-primary);
+    border-radius: 3px;
+    color: white;
+}
+
+.download-btn_text-icon{
+    min-width: 100px;
+    background-color: var(--color-primary);
+    border-radius: 3px;
+    color: white;
+}
+
+.download-btn_size-normal{
+    height: 40px;
+    padding: 0 var(--space-mid);
+}
+
+.download-btn__inner{
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.download-btn_icon > div > .download-btn__element{
+    
+}
+
+.download-btn__element{
+    background-color: transparent;
+    border: none;
+    color: currentColor;
+    cursor: inherit;
+}
+
+.download-btn__element__inner{
+    display: flex;
+    align-items: center;
+}
+
+.download-btn__element__icon{
+    margin-left: var(--space-tiny);
+}
+
+.download-btn__element__icon__inner{
+    height: 15px;
+    width: 15px;
+}
+
+.download-btn__element__icon__inner > svg {
+    fill: currentColor;
+}

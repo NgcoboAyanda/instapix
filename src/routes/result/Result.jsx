@@ -11,6 +11,7 @@ import InputRange from '../../components/InputRange/InputRange';
 import './Result.css';
 import { generateImages } from '../../features/images/imagesSlice';
 import Option from '../../components/Option/Option';
+import DownloadButton from '../../components/DownloadButton/DownloadButton';
 
 const Result = () => {
     const resultImages = useSelector(state => state.images.current);
@@ -61,15 +62,17 @@ const Result = () => {
                 )
             } )
         }
-        return resultImages.map( (img, i) => {
-            return (
-                <div className="result__main__content__items__item" key={i}>
-                    <div className="result__main__content__items__item__inner">
-                        <img className="result__main__content__items__item__img" src={img.url}/>
+        else{
+            return resultImages.map( (img, i) => {
+                return (
+                    <div className="result__main__content__items__item" key={i}>
+                        <div className="result__main__content__items__item__inner">
+                            <img className="result__main__content__items__item__img" src={img.url}/>
+                        </div>
                     </div>
-                </div>
-            )
-        })
+                )
+            })
+        }
     }
 
     return (
@@ -138,6 +141,16 @@ const Result = () => {
                                         <h1 className="heading heading_small">
                                             RESULTS
                                         </h1>
+                                    </div>
+                                </div>
+                                <div className="result__main__content__download-btn">
+                                    <div className="result__main__content__download-btn__inner">
+                                        <DownloadButton
+                                            status={status}
+                                            images={resultImages}
+                                            label="Download All Images"
+                                            variant="text-icon"
+                                        />
                                     </div>
                                 </div>
                                 <div className="result__main__content__items">
