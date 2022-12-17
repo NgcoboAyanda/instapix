@@ -1,14 +1,16 @@
 import React, { useEffect } from 'react';
-import { useForm } from 'react-hook-form';
+import { useForm, Controller } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router';
 import { useSearchParams } from 'react-router-dom';
 
 import InputText from '../../components/InputText/InputText';
 import Button from '../../components/Button/Button';
+import InputRange from '../../components/InputRange/InputRange';
 
 import './Result.css';
 import { generateImages } from '../../features/images/imagesSlice';
+import Option from '../../components/Option/Option';
 
 const Result = () => {
     const resultImages = useSelector(state => state.images.current);
@@ -18,7 +20,7 @@ const Result = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const { handleSubmit, register, watch } = useForm({
+    const { handleSubmit, register, watch, control } = useForm({
         defaultValues: {
             'prompt': searchParams.get('prompt'),
             'resolution': searchParams.get('resolution')
@@ -85,6 +87,35 @@ const Result = () => {
                                                     register={register}
                                                     name="prompt"
                                                     value={watch("prompt")}
+                                                />
+                                            </div>
+                                        </div>
+                                        <div className="result__main__form__element__resolution">
+                                            <div className="result__main__form__element__resolution__inner">
+                                                <Controller
+                                                    control={control}
+                                                    name="resolution"
+                                                    render={ ({field: {onChange, value}})=> (
+                                                        <Option
+                                                            label="Choose resolution size"
+                                                            value={value}
+                                                            setValue={onChange}
+                                                            options={['256x256', '512x512', '1024x1024']}
+                                                        />
+                                                    )}
+                                                />
+                                            </div>
+                                        </div>
+                                        <div className="result__main__form__element__slider">
+                                            <div className="result__main__form__element__slider__inner">
+                                                <InputRange
+                                                    name="nOfImages"
+                                                    value={watch('nOfImages')}
+                                                    label="Number of images to generate"
+                                                    minValue="1"
+                                                    maxValue="10"
+                                                    register={register}
+                                                    
                                                 />
                                             </div>
                                         </div>

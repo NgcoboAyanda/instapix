@@ -1,0 +1,22 @@
+.input-range__label{
+    font-size: var(--fs-small);
+    font-weight: var(--fw-big);
+}
+
+.input-range__element__inner > input {
+    width: 100%;
+}
+
+.input-range__count{
+    font-weight: var(--fw-mid);
+    color: var(--fc-light);
+    font-size: var(--fs-small);
+}
+
+.input-range__count__number{
+    font-weight: var(--fw-big) !important;
+}
+
+.input-range__count__text{
+    margin-left: var(--space-tiny);
+}
