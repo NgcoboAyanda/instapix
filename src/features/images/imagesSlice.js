@@ -4,7 +4,7 @@ const apiBaseUrl = 'http://localhost:8000'
 
 const initialState = {
     //images that were generated before
-    history: [],
+    searchHistory: [],
     //details on the image being generated or image that has just finished generating
     current: [],
     status: 'idle'
@@ -22,18 +22,16 @@ export const generateImages = createAsyncThunk(
         });
         if(response.status === 200){
             const images = await response.json();
-            const {setCurrent, addToHistory} = imagesSlice.actions
+            const {setCurrent, addToSearchHistory} = imagesSlice.actions
             //adding the images to state
             thunkAPI.dispatch(
                 setCurrent([...images])
             );
             //adding the images to history
+            const {prompt, resolution} = formdata;
             thunkAPI.dispatch(
-                addToHistory(images)
+                addToSearchHistory({prompt, resolution, images: [...images]})
             )
-        }
-        else{
-            console.log(response)
         }
     }
 )
@@ -48,8 +46,8 @@ const imagesSlice = createSlice({
             return {...state, current: action.payload};
         },
         //history
-        addToHistory: (state, action) => {
-            return {...state, history: [...state.history, action.payload]};
+        addToSearchHistory: (state, action) => {
+            return {...state, searchHistory: [...state.searchHistory, action.payload]};
         }
     },
     extraReducers: builder => {

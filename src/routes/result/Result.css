@@ -117,7 +117,7 @@
     margin-left: var(--space-mid);
     height: 100%;
     display: none;
-    width: 250px;
+    width: 330px;
     background-color: #f2f2f4;
     padding: var(--space-big) var(--space-mid);
 }
@@ -130,6 +130,14 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+.side-bar__content{
+    margin-top: var(--space-big);
+}
+
+.side-bar__content__inner{
+    padding: 0 var(--space-small);
 }
 
 @media all and (min-width: 700px) {

@@ -1,0 +1,21 @@
+.search-history__inner{
+    display: flex;
+    flex-direction: column;
+}
+
+.search-history__item:not(:first-child){
+    margin-top: var(--space-mid);
+}
+
+.search-history__item__images__inner{
+    display: flex;
+}
+
+.search-history__item__images__inner > img {
+    height: 45px;
+    width: 45px;
+}
+
+.search-history__item__images__inner > img:not(:first-child){
+    margin-left: var(--space-tiny);
+}

@@ -12,15 +12,15 @@ import './Result.css';
 import { generateImages } from '../../features/images/imagesSlice';
 import Option from '../../components/Option/Option';
 import DownloadButton from '../../components/DownloadButton/DownloadButton';
+import SearchHistory from '../../components/SearchHistory/SearchHistory';
 
 const Result = () => {
     const resultImages = useSelector(state => state.images.current);
-    const status = useSelector(state => state.images.status)
+    const searchHistory = useSelector(state => state.images.searchHistory);
+    const status = useSelector(state => state.images.status);
     const [searchParams, setSearchParams] = useSearchParams();
 
-    const location = useLocation()
     const dispatch = useDispatch();
-    const navigate = useNavigate();
 
     const { handleSubmit, register, watch, control } = useForm({
         defaultValues: {
@@ -49,7 +49,7 @@ const Result = () => {
         }
     }
 
-    const clearImageHistory = () => {
+    const clearSearchHistory = () => {
         console.log('cleared bih')
     }
 
@@ -191,10 +191,17 @@ const Result = () => {
                                             text={"Clear"}
                                             variant={'ui'}
                                             size={'small'}
-                                            onClick={clearImageHistory}
+                                            onClick={clearSearchHistory}
                                         />
                                     </div>
                                 </div>
+                            </div>
+                        </div>
+                        <div className="side-bar__content">
+                            <div className="side-bar__content__inner">
+                                <SearchHistory
+                                    history={searchHistory}
+                                />
                             </div>
                         </div>
                     </div>
