@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate, useParams } from 'react-router';
+import { useLocation, useNavigate, useParams } from 'react-router';
 import { useSearchParams } from 'react-router-dom';
 
 import InputText from '../../components/InputText/InputText';
@@ -16,8 +16,9 @@ import DownloadButton from '../../components/DownloadButton/DownloadButton';
 const Result = () => {
     const resultImages = useSelector(state => state.images.current);
     const status = useSelector(state => state.images.status)
-    const [searchParams] = useSearchParams();
+    const [searchParams, setSearchParams] = useSearchParams();
 
+    const location = useLocation()
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -28,8 +29,10 @@ const Result = () => {
         }
     });
 
+    //On Component Mount
     useEffect(
         () => {
+            window.scrollTo(0,0);//scroll to top of page
             const {prompt, resolution} = watch();
             if(prompt && resolution){
                 dispatch(generateImages({prompt, resolution}));
@@ -41,6 +44,7 @@ const Result = () => {
     const onSubmit = (data) => {
         if(data){
             const{prompt, resolution} = data;
+            setSearchParams({prompt, resolution});//updating url query strings
             dispatch(generateImages({prompt, resolution}));
         }
     }

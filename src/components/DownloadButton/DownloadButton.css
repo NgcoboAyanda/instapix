@@ -16,6 +16,10 @@
     color: white;
 }
 
+.download-btn_text-icon:hover{
+    background-color: var(--color-primary-light);
+}
+
 .download-btn_size-normal{
     height: 40px;
     padding: 0 var(--space-mid);

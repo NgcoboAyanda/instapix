@@ -22,9 +22,14 @@ export const generateImages = createAsyncThunk(
         });
         if(response.status === 200){
             const images = await response.json();
-            const {setCurrent} = imagesSlice.actions
+            const {setCurrent, addToHistory} = imagesSlice.actions
+            //adding the images to state
             thunkAPI.dispatch(
                 setCurrent([...images])
+            );
+            //adding the images to history
+            thunkAPI.dispatch(
+                addToHistory(images)
             )
         }
         else{
@@ -41,6 +46,10 @@ const imagesSlice = createSlice({
         //sets state.current to an array containing the images that have just been generated
         setCurrent: (state, action) => {
             return {...state, current: action.payload};
+        },
+        //history
+        addToHistory: (state, action) => {
+            return {...state, history: [...state.history, action.payload]};
         }
     },
     extraReducers: builder => {
