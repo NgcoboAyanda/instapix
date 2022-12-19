@@ -36,7 +36,7 @@ const Result = () => {
             window.scrollTo(0,0);//scroll to top of page
             const {prompt, resolution} = watch();
             if(prompt && resolution){
-                //dispatch(generateImages({prompt, resolution}));
+                dispatch(generateImages({prompt, resolution}));
             }
         },
         []

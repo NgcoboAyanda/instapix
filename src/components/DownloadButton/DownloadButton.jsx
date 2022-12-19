@@ -6,7 +6,6 @@ const DownloadButton = ({status, images, size='normal', variant="", label="aaaa"
     //There are two variants:
     //icon (a trasparent button that only shows the icon)
     //text-icon (shows both the text and the icon)
-    console.log(status)
 
     const renderBtn = () => {
         return (

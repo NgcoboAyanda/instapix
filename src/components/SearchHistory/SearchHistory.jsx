@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { removeFromSearchHistory } from '../../features/images/imagesSlice';
+import { loadSearchHistory, removeFromSearchHistory } from '../../features/images/imagesSlice';
 import RemoveImagesBtn from '../RemoveImagesBtn/RemoveImagesBtn';
 import ViewImagesBtn from '../ViewImagesBtn/ViewImagesBtn';
 
@@ -10,17 +10,25 @@ const SearchHistory = ({ history=[] }) => {
 
     const dispatch = useDispatch();
 
+    useEffect(
+        () => {
+            if(!history[0]){
+                dispatch( loadSearchHistory() );
+            }
+        },
+        []
+    )
+
     const renderHistoyItemImages = (images) => {
         return images.map( (img, i) => {
             return (
-                <img src={img.url} alt=""/>
+                <img src={img.url} alt="" key={i}/>
             )
         })
     }
 
     const openImageGallery = id => {
         const images = history.filter(searchObj => searchObj.id === id)[0].images;
-        console.log(images);
     }
 
     const renderHistoryItems = () => {
@@ -29,7 +37,7 @@ const SearchHistory = ({ history=[] }) => {
         const historyReversed = [...theSearchHistory].reverse();
         return historyReversed.map( (searchObj, i) => {
             return (
-                <div className="search-history__item">
+                <div className="search-history__item" key={i}>
                     <div className="search-history__item__inner">
                         <div className="search-history__item__images">
                             <div className="search-history__item__images__inner">
@@ -42,7 +50,7 @@ const SearchHistory = ({ history=[] }) => {
                                     onClick={()=> openImageGallery(searchObj.id)}
                                 />
                                 <RemoveImagesBtn
-                                    onClick={()=>dispatch(removeFromSearchHistory(searchObj.id))}
+                                    onClick={()=>dispatch(removeFromSearchHistory({id: searchObj.id}))}
                                 />
                             </div>
                         </div>

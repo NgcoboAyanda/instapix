@@ -10,6 +10,15 @@ const initialState = {
     status: 'idle'
 }
 
+const saveToLocalStorage = (name, data) => {
+    localStorage.setItem(name, JSON.stringify(data));
+}
+
+const getFromLocalStorage =(name) => {
+    const data = JSON.parse(localStorage.getItem(name));
+    return data;
+}
+
 export const generateImages = createAsyncThunk(
     'images/generateImages',
     async (formdata, thunkAPI) => {
@@ -55,16 +64,22 @@ const imagesSlice = createSlice({
         },
         //history
         addToSearchHistory: (state, action) => {
-            return {...state, searchHistory: [...state.searchHistory, action.payload]};
+            const newSearchHistory = [...state.searchHistory, action.payload];
+            saveToLocalStorage('searchHistory', newSearchHistory);
+            return {...state, searchHistory: newSearchHistory};
         },
         removeFromSearchHistory: (state, action) => {
-            const history = [...state.searchHistory];
-            const {id} = action.payload
-            const indexOfObject = history.findIndex(object => {
-            return object.id === id;
-            });
-            history.splice(indexOfObject, 1);
+            let history = [...state.searchHistory];
+            const{id} = action.payload;
+            history = history.filter(searchObj=> searchObj.id !== id);
+            saveToLocalStorage('searchHistory', history)
             return {...state, searchHistory: history};
+        },
+        loadSearchHistory: (state, action) => {
+            const searchHistory = getFromLocalStorage('searchHistory');
+            if(searchHistory){
+                return {...state, searchHistory};
+            }
         }
     },
     extraReducers: builder => {
@@ -81,6 +96,6 @@ const imagesSlice = createSlice({
     }
 })
 
-export const {removeFromSearchHistory} =imagesSlice.actions;
+export const {removeFromSearchHistory, loadSearchHistory} =imagesSlice.actions;
 
 export default imagesSlice;
