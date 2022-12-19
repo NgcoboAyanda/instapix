@@ -3,6 +3,10 @@
     flex-direction: column;
 }
 
+.search-history__item__inner{
+    display: flex;
+}
+
 .search-history__item:not(:first-child){
     margin-top: var(--space-mid);
 }
@@ -14,8 +18,26 @@
 .search-history__item__images__inner > img {
     height: 45px;
     width: 45px;
+    background-color: rgb(220, 220, 220);
 }
 
 .search-history__item__images__inner > img:not(:first-child){
+    margin-left: var(--space-tiny);
+}
+
+.search-history__item__buttons{
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.search-history__item__buttons__inner{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.search-history__item__buttons__inner > button:not(:first-child){
     margin-left: var(--space-tiny);
 }

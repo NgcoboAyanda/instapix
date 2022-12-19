@@ -25,7 +25,8 @@ const Result = () => {
     const { handleSubmit, register, watch, control } = useForm({
         defaultValues: {
             'prompt': searchParams.get('prompt'),
-            'resolution': searchParams.get('resolution')
+            'resolution': searchParams.get('resolution'),
+            'nOfImages': 4
         }
     });
 
@@ -35,7 +36,7 @@ const Result = () => {
             window.scrollTo(0,0);//scroll to top of page
             const {prompt, resolution} = watch();
             if(prompt && resolution){
-                dispatch(generateImages({prompt, resolution}));
+                //dispatch(generateImages({prompt, resolution}));
             }
         },
         []
@@ -164,6 +165,8 @@ const Result = () => {
                                 </div>
                             </div>
                         </div>
+                        {
+                        /*        
                         <div className="result__main__attribution">
                             <div className="result__main__attribution__inner">
                                 <div>
@@ -171,6 +174,8 @@ const Result = () => {
                                 </div>
                             </div>
                         </div>
+                        */
+                        }
                     </div>
                 </section>
                 <section className="result__sidebar">
