@@ -11,6 +11,12 @@
     justify-content: center;
 }
 
+.slideshow__download-btn{
+    position: absolute;
+    top: var(--space-mid);
+    left: var(--space-mid);
+}
+
 .slideshow__close-btn{
     width: 70px;
     height: 70px;

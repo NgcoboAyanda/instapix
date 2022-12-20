@@ -154,7 +154,7 @@
     padding: 0 var(--space-small);
 }
 
-@media all and (min-width: 700px) {
+@media all and (min-width: 840px) {
     .result__main__content__heading{
         display: none;
     }

@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { saveAs } from 'file-saver';
+
 import { clearCurrentImage, closeSlideshow, setCurrentImage } from '../../features/slideshow/slideshow';
+import FileDownloadBtn from '../FileDownloadBtn/FileDownloadBtn';
 import CloseBtn from './CloseBtn/CloseBtn';
 import NextBtn from './NextBtn/NextBtn';
 import PrevBtn from './PrevBtn/PrevBtn';
@@ -78,6 +81,21 @@ const Slideshow = () => {
         })
     }
 
+    const createImageDownloadArray = () => {
+        return (
+            slideshowImages.map( (img, i) => {
+                return {url: img.url, fileName: `${img.id}.jpg`}
+            })
+        )
+    }
+
+    const downloadImages = () => {
+        const files = createImageDownloadArray();
+        files.forEach( (file) => {
+            saveAs(file.url, file.fileName)
+        });
+    }
+
     return (
         <div className="slideshow">
             <div className="slideshow__inner">
@@ -85,6 +103,16 @@ const Slideshow = () => {
                     <div className="slideshow__close-btn__inner">
                         <CloseBtn
                             onClick={()=>dispatch( closeSlideshow())}
+                        />
+                    </div>
+                </div>
+                <div className="slideshow__download-btn">
+                    <div>
+                        <FileDownloadBtn
+                            files={createImageDownloadArray()}
+                            label="Download All Images"
+                            variant="borderless"
+                            download={downloadImages}
                         />
                     </div>
                 </div>

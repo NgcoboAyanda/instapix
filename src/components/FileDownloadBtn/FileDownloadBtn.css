@@ -1,0 +1,27 @@
+.download-btn{
+
+}
+
+.download-btn_variant-borderless{
+    color: var(--fc-light);
+    background-color: transparent;
+    border: none;
+}
+
+.download-btn_variant-borderless:active{
+    color: var(--color-primary);
+}
+
+.download-btn_variant-borderless > div {
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.download-btn__label{
+    font-size: var(--fs-mid);
+    margin-left: var(--space-tiny);
+}
+
+.download-btn__icon > div > svg {
+    fill: currentColor;
+}
