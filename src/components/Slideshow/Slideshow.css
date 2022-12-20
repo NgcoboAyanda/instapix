@@ -1,7 +1,7 @@
 .slideshow{
     height: 100vh;
     width: 100vw;
-    background-color: rgba(0, 0, 0, 0.898);
+    background-color: rgba(0, 0, 0, 0.944);
 }
 
 .slideshow__inner{
@@ -65,8 +65,8 @@
 }
 
 .slideshow__slider__image {
-    height: 300px;
-    width: 300px;
+    height: 350px;
+    width: 350px;
     background-color: rgb(234, 234, 234);
     margin-bottom: var(--space-big);
 }
@@ -122,6 +122,11 @@
 }
 
 @media all and (min-width: 700px){
+    .slideshow__slider__image {
+        height: 500px;
+        width: 500px;
+    }
+
     .slideshow__slider__images {
         height: 400px;
         width: 400px;

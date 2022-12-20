@@ -81,21 +81,6 @@ const Slideshow = () => {
         })
     }
 
-    const createImageDownloadArray = () => {
-        return (
-            slideshowImages.map( (img, i) => {
-                return {url: img.url, fileName: `${img.id}.jpg`}
-            })
-        )
-    }
-
-    const downloadImages = () => {
-        const files = createImageDownloadArray();
-        files.forEach( (file) => {
-            saveAs(file.url, file.fileName)
-        });
-    }
-
     return (
         <div className="slideshow">
             <div className="slideshow__inner">
@@ -106,6 +91,7 @@ const Slideshow = () => {
                         />
                     </div>
                 </div>
+                {/* 
                 <div className="slideshow__download-btn">
                     <div>
                         <FileDownloadBtn
@@ -115,7 +101,7 @@ const Slideshow = () => {
                             download={downloadImages}
                         />
                     </div>
-                </div>
+                </div> */}
                 <div className="slideshow__slider">
                     <div className="slideshow__slider__inner">
                         <div className="slideshow__slider__info">

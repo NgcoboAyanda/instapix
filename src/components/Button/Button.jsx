@@ -4,12 +4,6 @@ import './Button.css';
 
 const Button = ( {variant='filled', text='', size='normal', type='submit', onClick=null, loader=false, status=null} ) => {
 
-    const clickBtn = () => {
-        if (onClick !== null){
-            onClick();
-        }
-    }
-
     const renderLoader = () => {
         if(loader && status && status === 'loading'){
             return (
@@ -22,7 +16,7 @@ const Button = ( {variant='filled', text='', size='normal', type='submit', onCli
     }
 
     return (
-        <button type={type} onClick={()=>clickBtn()} className={`button button_${variant} button_size-${size}`}>
+        <button type={type} onClick={()=>console.log('a')} className={`button button_${variant} button_size-${size}`}>
             <div className={`button__inner button_${variant}__inner`}>
                 <div className={`button__text button_${variant}__text`}>
                     <div className={`button__text__inner button_${variant}__text__inner`}>

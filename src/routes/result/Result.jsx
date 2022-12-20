@@ -3,6 +3,7 @@ import { useForm, Controller } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useNavigate, useParams } from 'react-router';
 import { useSearchParams } from 'react-router-dom';
+import { saveAs } from 'file-saver';
 
 import InputText from '../../components/InputText/InputText';
 import Button from '../../components/Button/Button';
@@ -170,7 +171,8 @@ const Result = () => {
                                         </h1>
                                     </div>
                                 </div>
-                                <div className="result__main__content__download-btn">
+                                {/* 
+                                <div className="result__main__content__download-btn" onClick={downloadImages}>
                                     <div className="result__main__content__download-btn__inner">
                                         <DownloadButton
                                             status={status}
@@ -180,6 +182,7 @@ const Result = () => {
                                         />
                                     </div>
                                 </div>
+                                */}
                                 <div className="result__main__content__items">
                                     <div className="result__main__content__items__inner">
                                         {renderResultImages()}
