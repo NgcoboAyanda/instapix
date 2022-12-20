@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { loadSearchHistory, removeFromSearchHistory } from '../../features/images/imagesSlice';
+import { openSlideshow } from '../../features/slideshow/slideshow';
 import RemoveImagesBtn from '../RemoveImagesBtn/RemoveImagesBtn';
 import ViewImagesBtn from '../ViewImagesBtn/ViewImagesBtn';
 
@@ -20,11 +21,11 @@ const SearchHistory = ({ history=[] }) => {
 
     const openImageGallery = id => {
         const images = history.filter(searchObj => searchObj.id === id)[0].images;
+        dispatch( openSlideshow({images}) );
     }
 
     const renderHistoryItems = () => {
         let theSearchHistory = [...history];
-        theSearchHistory.pop();
         const historyReversed = [...theSearchHistory].reverse();
         return historyReversed.map( (searchObj, i) => {
             return (

@@ -9,7 +9,7 @@ const Error = ( {errorObj:{code=null, message=null}, clearError=null} ) => {
             setTimeout(
                 () => {
                     if(clearError){
-                        //clearError();
+                        clearError();
                     }   
                 },
                 5000

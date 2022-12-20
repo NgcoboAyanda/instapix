@@ -24,7 +24,6 @@ export const generateImages = createAsyncThunk(
             },
             body: JSON.stringify({...formdata})
         });
-        console.log(response)
         if(response.status === 200){
             const images = await response.json();
             const {setCurrent, addToSearchHistory} = imagesSlice.actions
@@ -70,11 +69,11 @@ const imagesSlice = createSlice({
             return {...state, searchHistory: history};
         },
         loadSearchHistory: (state, action) => {
-            const getFromLocalStorage =(name) => {
+            const getFromSessionStorage =(name) => {
                 const data = JSON.parse(sessionStorage.getItem(name));
                 return data;
             }
-            const searchHistory = getFromLocalStorage('searchHistory');
+            const searchHistory = getFromSessionStorage('searchHistory');
             if(searchHistory){
                 return {...state, searchHistory};
             }

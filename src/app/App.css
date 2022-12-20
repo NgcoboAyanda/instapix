@@ -2,6 +2,13 @@
   position: relative;
 }
 
+.app__slideshow{
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 8;
+}
+
 .app__content__inner > * {
   padding: 0 var(--space-mid);
   padding-top: 60px;

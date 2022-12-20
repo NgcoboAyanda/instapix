@@ -8,9 +8,11 @@ import Home from '../routes/home/Home';
 import Result from '../routes/result/Result';
 import { useDispatch, useSelector } from 'react-redux';
 import { loadSearchHistory } from '../features/images/imagesSlice';
+import Slideshow from '../components/Slideshow/Slideshow';
 
 
 function App() {
+  const slideshowOpen = useSelector(state => state.slideshow.slideshowOpen);
   const searchHistory = useSelector(state => state.images.searchHistory);
 
   const dispatch = useDispatch();
@@ -30,8 +32,28 @@ function App() {
   )
 
   const saveToSessionStorage = (name, data) => {
-    localStorage.setItem(name, JSON.stringify(data));
-}
+    sessionStorage.setItem(name, JSON.stringify(data));
+  }
+
+  useEffect(
+    ()=>{
+      if(slideshowOpen){
+        document.body.style.overflow = 'hidden';
+      }
+      else{
+        document.body.style.overflow = 'unset';
+      }
+    },
+    [slideshowOpen]
+  )
+
+  const renderSlideshow = () => {
+    if(slideshowOpen){
+      return (
+        <Slideshow/>
+      )
+    }
+  }
 
   return (
       <div className="app">
@@ -39,6 +61,11 @@ function App() {
           <div className="app__header">
             <div className="app__header__inner">
                 <Header/>
+            </div>
+          </div>
+          <div className="app__slideshow">
+            <div className="app__slideshow__inner">
+                {renderSlideshow()}
             </div>
           </div>
           <div className="app__content">

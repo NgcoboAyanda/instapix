@@ -38,8 +38,8 @@ const Result = () => {
         () => {
             window.scrollTo(0,0);//scroll to top of page
             const {prompt, resolution, nOfImages} = watch();
-            if(prompt && resolution){
-                dispatch(generateImages({prompt, resolution, nOfImages: parseInt(nOfImages)}));
+            if(prompt && resolution && nOfImages){
+                //dispatch(generateImages({prompt, resolution, nOfImages: parseInt(nOfImages)}));
             }
         },
         []

@@ -92,7 +92,13 @@
 }
 
 .result__main__content__items__item__img{
-    width: 100%;
+    width:auto;
+    height: 100%;
+    cursor: pointer;
+}
+
+.result__main__content__items__item__img:hover{
+    outline: 5px dotted var(--color-primary);
 }
 
 .result__main__content__items__item__loader{
