@@ -10,15 +10,6 @@ const SearchHistory = ({ history=[] }) => {
 
     const dispatch = useDispatch();
 
-    useEffect(
-        () => {
-            if(!history[0]){
-                dispatch( loadSearchHistory() );
-            }
-        },
-        []
-    )
-
     const renderHistoyItemImages = (images) => {
         return images.map( (img, i) => {
             return (

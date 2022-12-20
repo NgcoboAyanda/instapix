@@ -22,6 +22,10 @@
     flex-direction: column;
 }
 
+.result__main__error-message{
+    margin-top: var(--space-big);
+}
+
 .result__main__form{
     margin-top: var(--space-big);
 }
@@ -42,6 +46,7 @@
 .result__main__content{
     flex: 1;
     margin-top: var(--space-big);
+    margin-bottom: var(--space-big);
 }
 
 .result__main__content__inner{
@@ -66,10 +71,13 @@
 }
 
 .result__main__content__items__inner{
+    margin-top: var(--space-mid);
     height: 100%;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-rows: 200px 200px;
     grid-gap: var(--space-small);
+    margin-bottom: var(--space-big);
 }
 
 .result__main__content__items__item{
@@ -91,7 +99,7 @@
     color: #e8e8e8;
     background-color: currentColor;
     width: 230px;
-    height: 230px;
+    height: 100%;
     animation: 1.5s blink infinite;
 }
 

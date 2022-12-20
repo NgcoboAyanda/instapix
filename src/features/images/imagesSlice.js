@@ -7,16 +7,8 @@ const initialState = {
     searchHistory: [],
     //details on the image being generated or image that has just finished generating
     current: [],
-    status: 'idle'
-}
-
-const saveToLocalStorage = (name, data) => {
-    localStorage.setItem(name, JSON.stringify(data));
-}
-
-const getFromLocalStorage =(name) => {
-    const data = JSON.parse(localStorage.getItem(name));
-    return data;
+    status: 'idle',
+    error: {}
 }
 
 export const generateImages = createAsyncThunk(
@@ -30,8 +22,9 @@ export const generateImages = createAsyncThunk(
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({...formdata, numberOfImages: 4})
+            body: JSON.stringify({...formdata})
         });
+        console.log(response)
         if(response.status === 200){
             const images = await response.json();
             const {setCurrent, addToSearchHistory} = imagesSlice.actions
@@ -46,6 +39,9 @@ export const generateImages = createAsyncThunk(
             thunkAPI.dispatch(
                 addToSearchHistory({id, prompt, resolution, images: [...images]})
             )
+        }
+        else {
+            console.log(response)
         }
     }
 )
@@ -65,21 +61,30 @@ const imagesSlice = createSlice({
         //history
         addToSearchHistory: (state, action) => {
             const newSearchHistory = [...state.searchHistory, action.payload];
-            saveToLocalStorage('searchHistory', newSearchHistory);
             return {...state, searchHistory: newSearchHistory};
         },
         removeFromSearchHistory: (state, action) => {
             let history = [...state.searchHistory];
             const{id} = action.payload;
             history = history.filter(searchObj=> searchObj.id !== id);
-            saveToLocalStorage('searchHistory', history)
             return {...state, searchHistory: history};
         },
         loadSearchHistory: (state, action) => {
+            const getFromLocalStorage =(name) => {
+                const data = JSON.parse(sessionStorage.getItem(name));
+                return data;
+            }
             const searchHistory = getFromLocalStorage('searchHistory');
             if(searchHistory){
                 return {...state, searchHistory};
             }
+        },
+        clearSearchHistory: (state, action) => {
+            return {...state, searchHistory: []};
+        },
+        //errors
+        clearError: (state) => {
+            return {...state, error:{}};
         }
     },
     extraReducers: builder => {
@@ -91,11 +96,17 @@ const imagesSlice = createSlice({
         .addCase(generateImages.fulfilled, (state)=>{
             return {...state, status: 'idle'}
         })
-        
+        .addCase(generateImages.rejected, (state) => {
+            const error = { 
+                code: 408,
+                message: 'A network error occured, please try again!' 
+            };
+            return {...state, status: 'idle', error}
+        })
 
     }
 })
 
-export const {removeFromSearchHistory, loadSearchHistory} =imagesSlice.actions;
+export const {removeFromSearchHistory, loadSearchHistory, clearSearchHistory, clearError} =imagesSlice.actions;
 
 export default imagesSlice;

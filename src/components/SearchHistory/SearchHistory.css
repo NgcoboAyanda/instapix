@@ -11,6 +11,10 @@
     margin-top: var(--space-mid);
 }
 
+.search-history__item__images{
+    width: 192px;
+}
+
 .search-history__item__images__inner{
     display: flex;
 }

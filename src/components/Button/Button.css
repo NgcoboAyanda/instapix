@@ -5,6 +5,27 @@
     cursor: pointer;
 }
 
+.button__text__inner > div{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.button__text__inner > div > svg {
+    height: 35px;
+    width: 35px;
+    animation: rotate 1s linear infinite;
+}
+
+@keyframes rotate {
+    0%{
+        transform: rotate(0);
+    }
+    100%{
+        transform: rotate(360deg);
+    }
+}
+
 /* sizes */
 .button_size-normal{
     height: 50px;
@@ -22,6 +43,8 @@
     font-weight: var(--fw-big);
     background-color: var(--color-primary);
 }
+
+
 
 .button_filled__text__inner{
     color: white;

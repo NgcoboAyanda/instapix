@@ -9,14 +9,17 @@ import Button from '../../components/Button/Button';
 import InputRange from '../../components/InputRange/InputRange';
 
 import './Result.css';
-import { generateImages } from '../../features/images/imagesSlice';
+import { clearError, generateImages } from '../../features/images/imagesSlice';
 import Option from '../../components/Option/Option';
 import DownloadButton from '../../components/DownloadButton/DownloadButton';
 import SearchHistory from '../../components/SearchHistory/SearchHistory';
+import { clearSearchHistory } from '../../features/images/imagesSlice';
+import Error from '../../components/Error/Error';
 
 const Result = () => {
     const resultImages = useSelector(state => state.images.current);
     const searchHistory = useSelector(state => state.images.searchHistory);
+    const errorObj = useSelector(state => state.images.error);
     const status = useSelector(state => state.images.status);
     const [searchParams, setSearchParams] = useSearchParams();
 
@@ -34,9 +37,9 @@ const Result = () => {
     useEffect(
         () => {
             window.scrollTo(0,0);//scroll to top of page
-            const {prompt, resolution} = watch();
+            const {prompt, resolution, nOfImages} = watch();
             if(prompt && resolution){
-                dispatch(generateImages({prompt, resolution}));
+                dispatch(generateImages({prompt, resolution, nOfImages: parseInt(nOfImages)}));
             }
         },
         []
@@ -44,14 +47,14 @@ const Result = () => {
 
     const onSubmit = (data) => {
         if(data){
-            const{prompt, resolution} = data;
+            const{prompt, resolution, nOfImages} = data;
             setSearchParams({prompt, resolution});//updating url query strings
-            dispatch(generateImages({prompt, resolution}));
+            dispatch(generateImages({prompt, resolution, nOfImages: parseInt(nOfImages)}));
         }
     }
 
-    const clearSearchHistory = () => {
-        console.log('cleared bih')
+    const clearHistory = () => {
+        dispatch(clearSearchHistory());
     }
 
     const renderResultImages = () => {
@@ -80,11 +83,28 @@ const Result = () => {
         }
     }
 
+    const renderErrorComponent = () => {
+        const {message} = errorObj;
+        if(message){
+            return (
+                <Error
+                    errorObj={errorObj}
+                    clearError={()=>dispatch(clearError())}
+                />
+            )
+        }
+    }
+
     return (
         <div className="result">
             <div className="result__inner">
                 <section className="result__main">
                     <div className="result__main__inner">
+                        <div className="result__main__error-message">
+                            <div className="result__main__error-message__inner">
+                                {renderErrorComponent()}
+                            </div>
+                        </div>
                         <div className="result__main__form">
                             <div className="result__main__form__inner">
                                 <form className="result__main__form__element" onSubmit={handleSubmit(onSubmit)}>
@@ -121,7 +141,7 @@ const Result = () => {
                                                     value={watch('nOfImages')}
                                                     label="Number of images to generate"
                                                     minValue="1"
-                                                    maxValue="10"
+                                                    maxValue="4"
                                                     register={register}
                                                     
                                                 />
@@ -131,7 +151,9 @@ const Result = () => {
                                             <div className="result__main__form__element__submit__inner">
                                                 <Button
                                                     variant="filled"
-                                                    text="Generate Again"
+                                                    text="Generate Image(s)"
+                                                    loader={true}
+                                                    status={status}
                                                 />
                                             </div>
                                         </div>
@@ -196,7 +218,7 @@ const Result = () => {
                                             text={"Clear"}
                                             variant={'ui'}
                                             size={'small'}
-                                            onClick={clearSearchHistory}
+                                            onClick={clearHistory}
                                         />
                                     </div>
                                 </div>

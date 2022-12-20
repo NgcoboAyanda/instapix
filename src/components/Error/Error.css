@@ -1,0 +1,19 @@
+.error {
+    border: 1px solid rgb(191, 31, 31);
+    padding: var(--space-big) var(--space-mid);
+    font-size: var(--fs-small);
+    background-color: rgba(255, 0, 0, 0.195);
+    color: var(--fc-normal);
+}
+
+.error__inner{
+    display: flex;
+}
+
+.error__code{
+    font-weight: var(--fw-big);
+}
+
+.error__message{
+    margin-left: var(--space-small);
+}
