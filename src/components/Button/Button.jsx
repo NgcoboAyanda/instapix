@@ -16,7 +16,7 @@ const Button = ( {variant='filled', text='', size='normal', type='submit', onCli
     }
 
     return (
-        <button type={type} onClick={()=>console.log('a')} className={`button button_${variant} button_size-${size}`}>
+        <button type={type} className={`button button_${variant} button_size-${size}`}>
             <div className={`button__inner button_${variant}__inner`}>
                 <div className={`button__text button_${variant}__text`}>
                     <div className={`button__text__inner button_${variant}__text__inner`}>

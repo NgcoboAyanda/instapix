@@ -53,6 +53,7 @@ const Home = () => {
                                 </div>
                                 <div className="home__content__action__form">
                                     <div className="home__content__action__form__inner">
+                                        {/* 
                                         <div className="home__content__action__form__label">
                                             <div className="home__content__action__form__label__inner">
                                                 <div className="home__content__action__form__label__element">
@@ -61,10 +62,10 @@ const Home = () => {
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div> */}
                                         <form className="home__content__action__form__element" onSubmit={handleSubmit(onSubmit)}>
                                             <div className="home__content__action__form__element__inner">
-                                                <div className="home__content__action__form__element__input">
+                                                {/*<div className="home__content__action__form__element__input">
                                                     <div className="home__content__action__form__element__input__inner">
                                                         <InputText
                                                             register={register}
@@ -89,6 +90,7 @@ const Home = () => {
                                                         />
                                                     </div>
                                                  </div>
+                                                */}
                                                 <div className="home__content__action__form__element__submit">
                                                     <div className="home__content__action__form__element__submit__inner">
                                                         <Button

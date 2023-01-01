@@ -19,21 +19,23 @@ function App() {
 
   useEffect(
     () => {
-      dispatch(loadSearchHistory())
+      let sessionSearchHistory = JSON.parse(sessionStorage.getItem('searchHistory'));
+      if(sessionSearchHistory){
+        dispatch( loadSearchHistory({sessionSearchHistory}) )
+      }
+      else{
+        dispatch( loadSearchHistory({sessionSearchHistory: []}) )
+      }
     },
     []
   )
 
   useEffect(
     () => {
-      saveToSessionStorage('searchHistory', searchHistory);
+      sessionStorage.setItem('searchHistory', JSON.stringify(searchHistory));
     },
     [searchHistory]
   )
-
-  const saveToSessionStorage = (name, data) => {
-    sessionStorage.setItem(name, JSON.stringify(data));
-  }
 
   useEffect(
     ()=>{

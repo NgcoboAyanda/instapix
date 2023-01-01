@@ -16,11 +16,12 @@ export const generateImages = createAsyncThunk(
     async (formdata, thunkAPI) => {
         //clearing current images first
         const {clearCurrent} = imagesSlice.actions;
-        thunkAPI.dispatch( clearCurrent() )
+        thunkAPI.dispatch( clearCurrent() );
         const response = await fetch(`${apiBaseUrl}/images/generate/`, {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'X-Api-Key': process.env.REACT_APP_API_KEY
             },
             body: JSON.stringify({...formdata})
         });
@@ -40,7 +41,6 @@ export const generateImages = createAsyncThunk(
             )
         }
         else {
-            console.log(response)
         }
     }
 )
@@ -69,14 +69,8 @@ const imagesSlice = createSlice({
             return {...state, searchHistory: history};
         },
         loadSearchHistory: (state, action) => {
-            const getFromSessionStorage =(name) => {
-                const data = JSON.parse(sessionStorage.getItem(name));
-                return data;
-            }
-            const searchHistory = getFromSessionStorage('searchHistory');
-            if(searchHistory){
-                return {...state, searchHistory};
-            }
+            const {sessionSearchHistory} = action.payload;
+            return {...state, searchHistory: sessionSearchHistory};
         },
         clearSearchHistory: (state, action) => {
             return {...state, searchHistory: []};
