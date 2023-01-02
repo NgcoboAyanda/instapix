@@ -10,6 +10,13 @@
 }
 
 .app__content__inner > * {
-  padding: 0 var(--space-mid);
-  padding-top: 60px;
+  padding: 0 var(--space-tiny);
+  padding-top: 40px;
+}
+
+@media all and (min-width=600px){
+  .app__content__inner > * {
+    padding: 0 var(--space-mid);
+    padding-top: 40px;
+  }
 }
