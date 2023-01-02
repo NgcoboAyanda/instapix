@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/Instapix/static/css/main.de4ead7b.css",
+    "main.css": "/Instapix/static/css/main.510fcbf7.css",
     "main.js": "/Instapix/static/js/main.1096a389.js",
     "static/media/Logo.svg": "/Instapix/static/media/Logo.98142a8d502a140c713794d6a0193858.svg",
     "index.html": "/Instapix/index.html",
-    "main.de4ead7b.css.map": "/Instapix/static/css/main.de4ead7b.css.map",
+    "main.510fcbf7.css.map": "/Instapix/static/css/main.510fcbf7.css.map",
     "main.1096a389.js.map": "/Instapix/static/js/main.1096a389.js.map"
   },
   "entrypoints": [
-    "static/css/main.de4ead7b.css",
+    "static/css/main.510fcbf7.css",
     "static/js/main.1096a389.js"
   ]
 }
