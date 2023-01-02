@@ -75,7 +75,7 @@
     height: 100%;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    grid-template-rows: 200px 200px;
+    grid-template-rows: repeat(auto-fit, minmax(200px, 200px));
     grid-gap: var(--space-small);
     margin-bottom: var(--space-big);
 }
