@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
+const apiBaseUrl = 'https://instapixapi.onrender.com';
 //const apiBaseUrl = 'http://localhost:8000'
-const apiBaseUrl = 'https://api.openai.com/v1';
 
 const initialState = {
     //images that were generated before
@@ -18,7 +18,6 @@ export const generateImages = createAsyncThunk(
         //clearing current images first
         const {clearCurrent} = imagesSlice.actions;
         thunkAPI.dispatch( clearCurrent() );
-        /* 
         //API request to InstapixAPI
         const response = await fetch(`${apiBaseUrl}/images/generate/`, {
             method: 'POST',
@@ -27,24 +26,9 @@ export const generateImages = createAsyncThunk(
                 'X-Api-Key': process.env.REACT_APP_API_KEY
             },
             body: JSON.stringify({...formdata})
-        }); */
-        const{prompt, nOfImages:n, resolution:size} = formdata;
-        let response = await fetch(`${apiBaseUrl}/images/generations`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': "application/json",
-                'Authorization': `Bearer ${process.env.REACT_APP_OPENAI_API_KEY}`
-            },
-            body: JSON.stringify({
-                prompt,
-                n,
-                size,
-                response_format: 'url'
-            })
-        })
+        });
         if(response.status === 200){
-            response = await response.json();
-            const images = response.data;
+            let images = await response.json();
             const {setCurrent, addToSearchHistory} = imagesSlice.actions
             //adding the images to state
             thunkAPI.dispatch(
@@ -53,7 +37,7 @@ export const generateImages = createAsyncThunk(
             //adding the images to history
             //generating unique id for each search
             let id = "id" + Math.random().toString(16).slice(2);
-            const {prompt, size:resolution} = formdata;
+            const {prompt, resolution} = formdata;
             thunkAPI.dispatch(
                 addToSearchHistory({id, prompt, resolution, images: [...images]})
             )
