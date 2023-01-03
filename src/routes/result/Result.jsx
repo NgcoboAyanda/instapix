@@ -58,9 +58,13 @@ const Result = () => {
         dispatch(clearSearchHistory());
     }
 
+    const openImgInSlideshow = (imageList, index) => {
+        dispatch( setSlid )
+    }
+
     const renderResultImages = () => {
         if(status === 'loading'){
-            return [...Array(4)].map( (loader, i) => {
+            return [...Array(watch('nOfImages'))].map( (loader, i) => {
                 return (
                     <div className="result__main__content__items__item" key={i}>
                         <div className="result__main__content__items__item__inner">
@@ -76,7 +80,7 @@ const Result = () => {
                 return (
                     <div className="result__main__content__items__item" key={i}>
                         <div className="result__main__content__items__item__inner">
-                            <img className="result__main__content__items__item__img" src={img.url}/>
+                            <img className="result__main__content__items__item__img" src={img.url} onClick={()=>openImgInSlideshow(resultImages, index)}/>
                         </div>
                     </div>
                 )
