@@ -8,7 +8,7 @@ const initialState = {
     searchHistory: [],
     //details on the image being generated or image that has just finished generating
     current: [],
-    status: 'loading',
+    status: 'idle',
     error: {}
 }
 
