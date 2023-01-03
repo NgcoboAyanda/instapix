@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { saveAs } from 'file-saver';
 
-import { clearCurrentImage, closeSlideshow, setCurrentImage } from '../../features/slideshow/slideshow';
+import { goToSpecificImage, goToNextImage, goToPreviousImage, closeSlideshow} from '../../features/slideshow/slideshow';
 import FileDownloadBtn from '../FileDownloadBtn/FileDownloadBtn';
 import CloseBtn from './CloseBtn/CloseBtn';
 import NextBtn from './NextBtn/NextBtn';
@@ -11,45 +11,12 @@ import PrevBtn from './PrevBtn/PrevBtn';
 import './Slideshow.css';
 
 const Slideshow = () => {
-    const slideshowImages = useSelector(state => state.slideshow.images);
-    const currentImage = useSelector(state => state.slideshow.currentImage);
-
-    let [slideshowImageIndex, setSlideshowImageIndex] = useState(0);
+    const {images:slideshowImages,index:slideshowImageIndex} = useSelector(state => state.slideshow)
     
     const dispatch = useDispatch();
 
-    useEffect(
-        () => {
-            const{url} =currentImage;
-            if(!url){
-                dispatch(setCurrentImage({currentImage: slideshowImages[slideshowImageIndex]}))
-            }
-        },
-        []
-    )
-
-    useEffect(
-        () => {
-            dispatch(clearCurrentImage())
-            dispatch(setCurrentImage({currentImage: slideshowImages[slideshowImageIndex]}));
-        },
-        [slideshowImageIndex]
-    )
-
-    const goToPreviousImage = () => {
-        if(slideshowImageIndex > 0){
-            setSlideshowImageIndex(slideshowImageIndex-1);
-        }
-    }
-
-    const goToNextImage = () => {
-        if(slideshowImageIndex < slideshowImages.length - 1){
-            setSlideshowImageIndex(slideshowImageIndex+1);
-        }
-    }
-
     const renderCurrentImage = () => {
-        const {url=null} = currentImage;
+        const {url=null} =slideshowImages[slideshowImageIndex];
         if(url){
             return (
                 <img src={url} alt=""/>
@@ -68,7 +35,7 @@ const Slideshow = () => {
             }
 
             const setCurrentImage = (index) => {
-                setSlideshowImageIndex(index);
+                dispatch(goToSpecificImage({index}))
             }
 
             return (
@@ -132,14 +99,18 @@ const Slideshow = () => {
                         <div className="slideshow__slider__btn slideshow__slider__prev-btn">
                             <div>
                                 <PrevBtn
-                                    onClick={goToPreviousImage}
+                                    onClick={()=>{
+                                        dispatch( goToPreviousImage() )
+                                    }}
                                 />
                             </div>
                         </div>
                         <div className="slideshow__slider__btn slideshow__slider__next-btn">
                             <div>
                                 <NextBtn
-                                    onClick={goToNextImage}
+                                    onClick={()=>{
+                                        dispatch( goToNextImage() )
+                                    }}
                                 />
                             </div>
                         </div>

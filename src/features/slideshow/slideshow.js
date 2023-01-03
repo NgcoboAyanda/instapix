@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
     slideshowOpen: false,
     images: [],
-    currentImage: {}
+    index:0
 }
 
 const slideshowSlice = createSlice({
@@ -12,24 +12,41 @@ const slideshowSlice = createSlice({
     reducers: {
         //visibility
         openSlideshow: (state, action) => {
-            const{images, currentImage={}} = action.payload;
-            return {...state, slideshowOpen: true, images, currentImage};
+            const{images, index} = action.payload;
+            return {...state, slideshowOpen: true, images, index};
         },
         closeSlideshow: (state, action) => {
             return {...state, slideshowOpen: false};
         },
-        //currentImage
-        setCurrentImage: (state, action) => {
-            const {currentImage} = action.payload;
-            return {...state, currentImage};
+        //index
+        goToNextImage: (state, action) => {
+            let {images, index} = state;
+            if(index < images.length-1){
+                index++;
+            }
+            else{
+                index=0
+            }
+            return {...state, index};
         },
-        clearCurrentImage: (state, action) => {
-            return {...state, currentImage: {}};
+        goToPreviousImage: (state, action) => {
+            let {images, index} = state;
+            if(index > 0){
+                index--;
+            }
+            else{
+                index=images.length-1;
+            }
+            return {...state, index};
+        },
+        goToSpecificImage: (state, action) => {
+            const {index} = action.payload;
+            return {...state, index};
         }
     }
 
 })
 
-export const {openSlideshow, closeSlideshow, setCurrentImage, clearCurrentImage} = slideshowSlice.actions;
+export const {openSlideshow, closeSlideshow, goToNextImage, goToPreviousImage, goToSpecificImage} = slideshowSlice.actions;
 
 export default slideshowSlice;

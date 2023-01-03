@@ -16,6 +16,7 @@ import DownloadButton from '../../components/DownloadButton/DownloadButton';
 import SearchHistory from '../../components/SearchHistory/SearchHistory';
 import { clearSearchHistory } from '../../features/images/imagesSlice';
 import Error from '../../components/Error/Error';
+import { openSlideshow } from '../../features/slideshow/slideshow';
 
 const Result = () => {
     const resultImages = useSelector(state => state.images.current);
@@ -58,8 +59,8 @@ const Result = () => {
         dispatch(clearSearchHistory());
     }
 
-    const openImgInSlideshow = (imageList, index) => {
-        dispatch( setSlid )
+    const openImgInSlideshow = (images, index) => {
+        dispatch( openSlideshow({images, index}) )
     }
 
     const renderResultImages = () => {
@@ -80,7 +81,7 @@ const Result = () => {
                 return (
                     <div className="result__main__content__items__item" key={i}>
                         <div className="result__main__content__items__item__inner">
-                            <img className="result__main__content__items__item__img" src={img.url} onClick={()=>openImgInSlideshow(resultImages, index)}/>
+                            <img className="result__main__content__items__item__img" src={img.url} onClick={()=>openImgInSlideshow(resultImages, i)}/>
                         </div>
                     </div>
                 )
