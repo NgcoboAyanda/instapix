@@ -53,3 +53,9 @@
 .home__content__action__form__element__submit{
     margin-top: var(--space-mid);
 }
+
+@media all and (min-width: 600px) {
+    .home__inner{
+        padding-top: 100px;
+    }
+}

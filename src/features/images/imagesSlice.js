@@ -43,6 +43,14 @@ export const generateImages = createAsyncThunk(
             )
         }
         else {
+            const error = await response.json() || null;
+            const {setError} = imagesSlice.actions;
+            thunkAPI.dispatch({
+                error: {
+                    code: response.status,
+                    message: error?error.message:''
+                }
+            })
         }
     }
 )
@@ -78,6 +86,10 @@ const imagesSlice = createSlice({
             return {...state, searchHistory: []};
         },
         //errors
+        setError: (state, action) => {
+            const { error } = action.payload;
+            return {...state, error}
+        },
         clearError: (state) => {
             return {...state, error:{}};
         }

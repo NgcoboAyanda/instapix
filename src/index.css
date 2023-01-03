@@ -8,6 +8,7 @@
   --fs-small: 13px;
   --fs-mid: 18px;
   --fs-big: 25px;
+  --fs-bigger:38px;
   /* font-weight */
   --fw-small: 300;
   --fw-mid: 400;
@@ -51,7 +52,7 @@
 }
 
 .heading_small{
-  font-size: var(--fs-normal)
+  font-size: var(--fs-mid)
 }
 
 .heading_big{
@@ -60,7 +61,7 @@
 
 
 .paragraph{
-  font-size: var(--fs-normal);
+  font-size: var(--fs-mid);
 }
 
 /* buttons */
@@ -87,4 +88,15 @@
 
 .btn_icon__svg__container > svg{
   fill: var(--fc-normal);
+}
+
+@media all and (min-width: 600px){
+
+  .heading_big{
+    font-size: var(--fs-bigger);
+  }
+
+  .paragraph{
+    font-size: var(--fs-big);
+  }
 }
