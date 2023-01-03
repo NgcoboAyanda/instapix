@@ -12,7 +12,7 @@ const slideshowSlice = createSlice({
     reducers: {
         //visibility
         openSlideshow: (state, action) => {
-            const{images, index} = action.payload;
+            const{images, index=0} = action.payload;
             return {...state, slideshowOpen: true, images, index};
         },
         closeSlideshow: (state, action) => {
